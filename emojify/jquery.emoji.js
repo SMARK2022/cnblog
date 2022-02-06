@@ -406,11 +406,12 @@ var emojiLists = [{ name: "Bilibili小电视", path: "/bilibilitv/", file: ".gif
 
 }(jQuery, window, document));
 
-window.onload = function f() {
-    $("#post_detail").emojiParse({
+$("#post_detail").emojiParse({
         basePath: 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji',
         icons: emojiLists
     });
+
+window.onload = function f() {
     $("#blog-comments-placeholder").emojiParse({
         basePath: 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji',
         icons: emojiLists
