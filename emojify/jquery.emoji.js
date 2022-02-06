@@ -421,10 +421,10 @@ window.onload = function f() {
         basePath: 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji',
         icons: emojiLists   // 注：详见 js/emoji.list.js
     });
-    $("#emoji_btn_1").click(function () {
-        $("#tbCommentBody").emojiParse({
-            basePath: 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji',
-            icons: emojiLists
-        });
-    });
+    //$("#emoji_btn_1").click(function () {
+    //    $("#tbCommentBody").emojiParse({
+    //        basePath: 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji',
+    //        icons: emojiLists
+    //    });
+    //});
 }
