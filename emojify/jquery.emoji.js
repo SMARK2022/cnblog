@@ -409,6 +409,7 @@ var emojiLists = [{ name: "Bilibili小电视", path: "/bilibilitv/", file: ".gif
 
 
 function f() {
+    console.log("Emojifying...");
     $("#post_detail").emojiParse({
         basePath: 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji',
         icons: emojiLists
