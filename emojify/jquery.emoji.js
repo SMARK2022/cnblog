@@ -408,28 +408,23 @@ var emojiLists = [{ name: "Bilibili小电视", path: "/bilibilitv/", file: ".gif
 
 
 
-//function f() {
-//    console.log("Emojifying...");
-//    $("#post_detail").emojiParse({
-//        basePath: 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji',
-//        icons: emojiLists
-//    });
-//    //$("#emoji_btn_1").click(function () {
-//    //    $("#tbCommentBody").emojiParse({
-//    //        basePath: 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji',
-//    //        icons: emojiLists
-//    //    });
-//    //});
-//}
-//
-//setTimeout("f()",8000);
-
-$(document).ready(function(){
+function f() {
     console.log("Emojifying...");
     $("#post_detail").emojiParse({
         basePath: 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji',
         icons: emojiLists
     });
+    //$("#emoji_btn_1").click(function () {
+    //    $("#tbCommentBody").emojiParse({
+    //        basePath: 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji',
+    //        icons: emojiLists
+    //    });
+    //});
+};
+
+setTimeout("f()",6000);
+
+$(document).ready(function(){
     $("#blog-comments-placeholder").emojiParse({
         basePath: 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji',
         icons: emojiLists
