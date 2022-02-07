@@ -431,4 +431,4 @@ function f() {
     //});
 }
 
-setTimeout(f(), 8000 )
+setTimeout("f()",5000);
