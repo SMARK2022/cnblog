@@ -747,19 +747,19 @@ function emojiParse(content, basePath, iconsGroup) {
 };
 
 $(document).ready(function() {
-    emojiParse($("#post_detail"), 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji', emojiLists);
+    setTimeout("emojiParse($('#post_detail'), 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji', emojiLists);", 5000);
 });
 
 $(window).load(function() {
-    emojiParse($("#post_detail"), 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji', emojiLists);
-    emojiParse($("#blog-comments-placeholder"), 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji', emojiLists);
-    $("#tbCommentBody").emoji({
+    emojiParse($('#post_detail'), 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji', emojiLists);
+    emojiParse($('#blog-comments-placeholder'), 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji', emojiLists);
+    $('#tbCommentBody').emoji({
         showTab: false,
         animation: 'slide',
         basePath: 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji',
         icons: emojiLists // 注：详见 js/emoji.list.js
     });
-    document.getElementById("btn_preview_comment").addEventListener("click",
+    document.getElementById('btn_preview_comment').addEventListener('click',
     function() {
         setTimeout("emojiParse($('#tbCommentBodyPreviewBody'), 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji', emojiLists);", 1000)
     });
