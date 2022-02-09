@@ -739,7 +739,7 @@ function emojiParse(content, basePath, iconsGroup) {
                 }));
             } else {
                 pattern = placeholder.replace(new RegExp('{alias}', 'gi'), '(\\d+?)');
-                content.html(content.html().replace(new RegExp(pattern, 'gm'), '<img class="wp-smiley" style="height:'+imgheight+';width:auto" src="' + path + '$1' + file + '"/>'));
+                content.html(content.html().replace(new RegExp(pattern, 'gm'), '<img class="wp-smiley" height='+imgheight+' width="auto" src="' + path + '$1' + file + '"/>'));
             }
 
         }
