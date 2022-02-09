@@ -378,7 +378,7 @@ function f() {
     
 };
 
-setTimeout("f()", 5000);
+setTimeout("f()", 8000);
 
 window.addEventListener("load", function (event) {
     emojiParse($("#post_detail"), 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji', emojiLists);
