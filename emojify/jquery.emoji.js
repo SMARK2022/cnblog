@@ -750,7 +750,7 @@ $(document).ready(function() {
     emojiParse($("#post_detail"), 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji', emojiLists);
 });
 
-$(window).load(
+$(window).load(function() {
     emojiParse($("#post_detail"), 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji', emojiLists);
     emojiParse($("#blog-comments-placeholder"), 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji', emojiLists);
     $("#tbCommentBody").emoji({
@@ -763,4 +763,4 @@ $(window).load(
     function() {
         setTimeout("emojiParse($('#tbCommentBodyPreviewBody'), 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji', emojiLists);", 1000)
     });
-);
+    });
