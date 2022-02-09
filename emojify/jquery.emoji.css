@@ -199,8 +199,6 @@
 }
 /* 小表情 */
 .wp-smiley {
-    height: 50px;
-    width: auto;
     max-height: none!important;
     vertical-align: bottom;
     -webkit-box-shadow: none!important;

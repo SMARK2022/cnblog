@@ -759,7 +759,7 @@ function emojify(){
     function() {
         setTimeout("emojiParse($('#tbCommentBodyPreviewBody'), 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji', emojiLists);", 1000)
     });
-}
+};
 
 setTimeout("emojify();", 4000);
 
