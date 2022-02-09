@@ -746,9 +746,7 @@ function emojiParse(content, basePath, iconsGroup) {
     }
 };
 
-setTimeout("emojiParse($('#post_detail'), 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji', emojiLists);", 5000);
-
-$(document).ready(function() {
+function emojify(){
     emojiParse($("#post_detail"), 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji', emojiLists);
     emojiParse($("#blog-comments-placeholder"), 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji', emojiLists);
     $("#tbCommentBody").emoji({
@@ -761,4 +759,10 @@ $(document).ready(function() {
     function() {
         setTimeout("emojiParse($('#tbCommentBodyPreviewBody'), 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji', emojiLists);", 1000)
     });
+}
+
+setTimeout("emojify();", 4000);
+
+$(document).ready(function() {
+    emojify();
 });
