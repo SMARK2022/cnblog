@@ -319,77 +319,120 @@ var emojiLists = [{ name: "Bilibili小电视", path: "/bilibilitv/", file: ".gif
 
 }(jQuery, window, document));
 
+(function ($, window, document) {
 
-function emojiParse(content, basePath,iconsGroup) {
-    var groupLength = iconsGroup.length;
-    var path,
-        file,
-        placeholder,
-        emoji,
-        pattern,
-        regexp;
-    if (groupLength > 0) {
+    var PLUGIN_NAME = 'emojiParse',
+        VERSION = '1.1.1',
+        DEFAULTS = {
+            icons: []
+        };
 
-        for (var i = 0; i < groupLength; i++) {
-            path = basePath + '/' + iconsGroup[i].path;
-            file = iconsGroup[i].file || '.jpg';
-            placeholder = iconsGroup[i].placeholder;
-            placeholder = placeholder.replace('[', '\\[');
-            placeholder = placeholder.replace(']', '\\]');
-            placeholder = placeholder.replace('(', '\\(');
-            placeholder = placeholder.replace(')', '\\)');
-
-            emoji = iconsGroup[i].emoji;
-            if (!path) {
-                console.error('第 ' + i + ' 组表情未配置图片路径 path');
-                continue;
-            }
-
-            if (emoji) {
-
-                if (typeof emoji !== 'object') {
-                    console.error('第 ' + i + ' 组 emoji 参数设置不正确');
-                    break;
-                }
-
-                pattern = placeholder.replace(new RegExp('{alias}', 'gi'), '([\\s\\S]+?)');
-
-                regexp = new RegExp(pattern, 'gm');
-                content.html(content.html().replace(regexp, function ($0, $1) {
-                    var n = emoji[$1];
-                    if (n) {
-                        return '<img class="wp-smiley" src="' + path + n + file + '" title="' + $1 + '" alt="' + $1 + '"/>';
-                    } else {
-                        return $0;
-                    }
-                }));
-            } else {
-                pattern = placeholder.replace(new RegExp('{alias}', 'gi'), '(\\d+?)');
-                content.html(content.html().replace(new RegExp(pattern, 'gm'), '<img class="wp-smiley" src="' + path + '$1' + file + '"/>'));
-            }
-
-        }
+    function Plugin(element, options) {
+        this.$content = $(element);
+        this.options = options;
+        this._init();
     }
-};
+
+    Plugin.prototype = {
+        _init: function () {
+            var that = this;
+            var iconsGroup = this.options.icons;
+            var basePath = this.options.basePath;
+            var groupLength = iconsGroup.length;
+            var path,
+                file,
+                placeholder,
+                emoji,
+                pattern,
+                regexp;
+            if (groupLength > 0) {
+
+                for (var i = 0; i < groupLength; i++) {
+                    path = basePath + '/' + iconsGroup[i].path;
+                    file = iconsGroup[i].file || '.jpg';
+                    placeholder = iconsGroup[i].placeholder;
+                    placeholder = placeholder.replace('[', '\\[');
+                    placeholder = placeholder.replace(']', '\\]');
+                    placeholder = placeholder.replace('(', '\\(');
+                    placeholder = placeholder.replace(')', '\\)');
+
+                    emoji = iconsGroup[i].emoji;
+                    if (!path) {
+                        console.error('第 ' + i + ' 组表情未配置图片路径 path');
+                        continue;
+                    }
+
+                    if (emoji) {
+
+                        if (typeof emoji !== 'object') {
+                            console.error('第 ' + i + ' 组 emoji 参数设置不正确');
+                            break;
+                        }
+
+                        pattern = placeholder.replace(new RegExp('{alias}', 'gi'), '([\\s\\S]+?)');
+
+                        regexp = new RegExp(pattern, 'gm');
+                        that.$content.html(that.$content.html().replace(regexp, function ($0, $1) {
+                            var n = emoji[$1];
+                            if (n) {
+                                return '<img class="wp-smiley" src="' + path + n + file + '" title="' + $1 + '" alt="' + $1 + '"/>';
+                            } else {
+                                return $0;
+                            }
+                        }));
+                    } else {
+                        pattern = placeholder.replace(new RegExp('{alias}', 'gi'), '(\\d+?)');
+                        that.$content.html(that.$content.html().replace(new RegExp(pattern, 'gm'), '<img class="wp-smiley" src="' + path + '$1' + file + '"/>'));
+                    }
+
+                }
+            }
+        }
+    };
+
+    function fn(option) {
+        return this.each(function () {
+            var $this = $(this);
+            var data = $this.data('plugin_' + PLUGIN_NAME);
+            var options = $.extend({}, DEFAULTS, $this.data(), typeof option === 'object' && option);
+
+            if (!data) $this.data('plugin_' + PLUGIN_NAME, (data = new Plugin(this, options)));
+            if (typeof option === 'string') data[option]();
+        });
+    }
+
+    $.fn[PLUGIN_NAME] = fn;
+    $.fn[PLUGIN_NAME].Constructor = Plugin;
+
+}(jQuery, window, document));
+
+
 
 function f() {
     console.log("Emojifying...");
-    emojiParse($("#post_detail"), 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji', emojiLists);
-    
+    $("#post_detail").emojiParse({
+        basePath: 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji',
+        icons: emojiLists
+    });
+    //$("#emoji_btn_1").click(function () {
+    //    $("#tbCommentBody").emojiParse({
+    //        basePath: 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji',
+    //        icons: emojiLists
+    //    });
+    //});
 };
 
-setTimeout("f()", 5000);
+setTimeout("f()",6000);
 
-window.addEventListener("load", function (event) {
-    emojiParse($("#post_detail"), 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji', emojiLists);
-    emojiParse($("#blog-comments-placeholder"), 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji', emojiLists);
+window.addEventListener("load", function(event) {
+    $("#blog-comments-placeholder").emojiParse({
+        basePath: 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji',
+        icons: emojiLists
+    });
     $("#tbCommentBody").emoji({
         showTab: false,
         animation: 'slide',
         basePath: 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji',
         icons: emojiLists   // 注：详见 js/emoji.list.js
-    });
-    document.getElementById("btn_preview_comment").addEventListener("click", function () {
-        setTimeout('emojiParse($("#tbCommentBodyPreviewBody"), "https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji", emojiLists);', 2000)
     });
 });
