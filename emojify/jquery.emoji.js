@@ -114,7 +114,7 @@ var emojiLists = [{ name: "Bilibili小电视", path: "/bilibilitv/", file: ".gif
 
                         notation = placeholder.replace(new RegExp('{alias}', 'gi'), tmp.toString());
                         panel += '<li><a data-emoji_code="' + notation + '" data-index="' + index + '" title="' + tmp +
-                            '"><img class="wp-smiley" src="' + path + emoji[tmp] + file + '"/></a></li>';
+                            '"><img class="wp-smiley" height=50px width=50px src="' + path + emoji[tmp] + file + '"/></a></li>';
                     }
 
 
@@ -321,6 +321,7 @@ var emojiLists = [{ name: "Bilibili小电视", path: "/bilibilitv/", file: ".gif
 
 
 function emojiParse(content, basePath,iconsGroup) {
+    console.log("Emojifying...");
     var groupLength = iconsGroup.length;
     var path,
         file,
@@ -358,14 +359,14 @@ function emojiParse(content, basePath,iconsGroup) {
                 content.html(content.html().replace(regexp, function ($0, $1) {
                     var n = emoji[$1];
                     if (n) {
-                        return '<img class="wp-smiley" src="' + path + n + file + '" title="' + $1 + '" alt="' + $1 + '"/>';
+                        return '<img class="wp-smiley" height=50px width=50px src="' + path + n + file + '" title="' + $1 + '" alt="' + $1 + '"/>';
                     } else {
                         return $0;
                     }
                 }));
             } else {
                 pattern = placeholder.replace(new RegExp('{alias}', 'gi'), '(\\d+?)');
-                content.html(content.html().replace(new RegExp(pattern, 'gm'), '<img class="wp-smiley" src="' + path + '$1' + file + '"/>'));
+                content.html(content.html().replace(new RegExp(pattern, 'gm'), '<img class="wp-smiley" height=50px width=50px src="' + path + '$1' + file + '"/>'));
             }
 
         }
@@ -378,7 +379,7 @@ function f() {
     
 };
 
-setTimeout("f()", 8000);
+setTimeout("f()", 3000);
 
 window.addEventListener("load", function (event) {
     emojiParse($("#post_detail"), 'https://cdn.jsdelivr.net/gh/SMARK2022/imgbase/emoji', emojiLists);
